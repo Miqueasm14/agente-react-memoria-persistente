@@ -1,0 +1,107 @@
+{
+  "recursion_limit": 10,
+  "conversaciones": [
+    {
+      "prueba": "razonamiento multi-paso",
+      "thread_id": "demo-20261005-215042",
+      "pasos": [
+        {
+          "paso": "usuario",
+          "contenido": "¿Cuántos pedidos tuvo Ana García y cuál fue el total?"
+        },
+        {
+          "paso": "el agente decide usar una herramienta",
+          "herramienta": "buscar_cliente_por_nombre",
+          "argumentos": {
+            "nombre": "Ana García"
+          }
+        },
+        {
+          "paso": "la herramienta devuelve",
+          "herramienta": "buscar_cliente_por_nombre",
+          "resultado": "Cliente encontrado: 'Ana García' -> cliente_id=102"
+        },
+        {
+          "paso": "el agente decide usar una herramienta",
+          "herramienta": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        },
+        {
+          "paso": "la herramienta devuelve",
+          "herramienta": "buscar_pedidos",
+          "resultado": "{\"pedidos\": 3, \"total\": 14500}"
+        },
+        {
+          "paso": "respuesta final",
+          "contenido": "Ana García tuvo un total de 3 pedidos y el monto total gastado fue de $14.500."
+        }
+      ]
+    },
+    {
+      "prueba": "memoria (mismo thread_id)",
+      "thread_id": "demo-20261005-215042",
+      "pasos": [
+        {
+          "paso": "usuario",
+          "contenido": "¿Y Juan Pérez?"
+        },
+        {
+          "paso": "el agente decide usar una herramienta",
+          "herramienta": "buscar_cliente_por_nombre",
+          "argumentos": {
+            "nombre": "Juan Pérez"
+          }
+        },
+        {
+          "paso": "la herramienta devuelve",
+          "herramienta": "buscar_cliente_por_nombre",
+          "resultado": "Cliente encontrado: 'Juan Pérez' -> cliente_id=205"
+        },
+        {
+          "paso": "el agente decide usar una herramienta",
+          "herramienta": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 205
+          }
+        },
+        {
+          "paso": "la herramienta devuelve",
+          "herramienta": "buscar_pedidos",
+          "resultado": "{\"pedidos\": 1, \"total\": 3200}"
+        },
+        {
+          "paso": "respuesta final",
+          "contenido": "Juan Pérez tuvo 1 pedido y el monto total gastado fue de $3.200."
+        }
+      ]
+    },
+    {
+      "prueba": "ciclo de retorno (error de herramienta)",
+      "thread_id": "error-20261005-215042",
+      "pasos": [
+        {
+          "paso": "usuario",
+          "contenido": "¿Cuántos pedidos tuvo el cliente Roberto Sánchez?"
+        },
+        {
+          "paso": "el agente decide usar una herramienta",
+          "herramienta": "buscar_cliente_por_nombre",
+          "argumentos": {
+            "nombre": "Roberto Sánchez"
+          }
+        },
+        {
+          "paso": "la herramienta devuelve",
+          "herramienta": "buscar_cliente_por_nombre",
+          "resultado": "ERROR: no se encontró ningún cliente con el nombre 'Roberto Sánchez'. Verificá que el nombre esté completo y bien escrito."
+        },
+        {
+          "paso": "respuesta final",
+          "contenido": "No pude encontrar ningún cliente registrado con el nombre \"Roberto Sánchez\". ¿Podrías verificar si está bien escrito o si tiene algún otro nombre con el que esté registrado?"
+        }
+      ]
+    }
+  ]
+}
